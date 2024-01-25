@@ -1,48 +1,49 @@
-// 학생 성적 찾기
+// 날짜 번호 구하기
+// 몇 월 며칠을 입력 받았을 때 해당 날짜가 올해 몇 번째 날짜인지 구하는 프로그램
 
 #include <iostream>
 using namespace std;
 
 int main()
 {
-    int score1, score2, score3;
-    int maxScore, minScore, studentGrade;
+    int month, day;
+    int totalDays = 0;
 
-    cout << "첫 번째 점수 입력: ";
-    cin >> score1;
-    cout << "두 번째 점수 입력: ";
-    cin >> score2;
-    cout << "세 번째 점수 입력: ";
-    cin >> score3;
+    cout << "몇 월인지 입력하세요: ";
+    cin >> month;
+    cout << "며칠인지 입력하세요: ";
+    cin >> day;
 
-    cout << "입력한 점수 = " << score1 << " " << score2 << " " << score3 << endl;
+    int m01 = 31;
+    int m02 = 28;
+    int m03 = 31;
+    int m04 = 30;
+    int m05 = 31;
+    int m06 = 30;
+    int m07 = 31;
+    int m08 = 31;
+    int m09 = 30;
+    int m10 = 31;
+    int m11 = 30;
 
-    if(score1 > score2 && score1 > score3){
-        maxScore = score1;
-    }
-    else if(score2 > score1 && score2 > score3){
-        maxScore = score2;
-    }
-    else if(score3 > score1 && score3 > score2){
-        maxScore = score3;
-    }
-
-    if(score1 < score2 && score1 < score3){
-        minScore = score1;
-    }
-    else if(score2 < score1 && score2 < score3){
-        minScore = score2;
-    }
-    else if(score3 < score1 && score3 < score2){
-        minScore = score3;
+    switch (month)
+    {
+    case 12: totalDays += m11;
+    case 11: totalDays += m10;
+    case 10: totalDays += m09;
+    case 9: totalDays += m08;
+    case 8: totalDays += m07;
+    case 7: totalDays += m06;
+    case 6: totalDays += m05;
+    case 5: totalDays += m04;
+    case 4: totalDays += m03;
+    case 3: totalDays += m02;
+    case 2: totalDays += m01;
+    case 1: totalDays += 0;
     }
 
-    cout << "최소 점수와 최대 점수 = " << minScore << " " << maxScore << endl;
+    totalDays += day;
 
-    studentGrade = (minScore + maxScore) / 2;
-    if((minScore + maxScore) % 2 != 0){
-        studentGrade++;
-    }
-    cout << "학생 성적 = " << studentGrade << endl;
+    cout << "올해의 " << totalDays << "번째 날입니다." << endl;
     return 0;
 }
