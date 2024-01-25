@@ -1,18 +1,21 @@
-// pass-by-value
+// 변수 swqp하기
 
 #include <iostream>
 using namespace std;
 
-void fun(int y){
-    y++;
-    cout << "fun 함수 내부의 y = " << y << endl;
+void swap(int& x, int& y){
+    int tmp = x;
+    x = y;
+    y = tmp;
 }
 
 int main()
 {
     int x = 10;
-    fun(x);
+    int y = 20;
+    swap(x, y);
 
-    cout << "main 함수 내부의 x = " << x << endl;
+    cout << "swqp 후 x 값 = " << x << endl;
+    cout << "swap 후 y 값 = " << y << endl;
     return 0;
 }
