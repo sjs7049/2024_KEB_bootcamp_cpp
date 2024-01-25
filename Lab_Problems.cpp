@@ -1,22 +1,34 @@
-// 거듭제곱 곱하기
+// 최솟값과 최댓값 찾기
 
 #include <iostream>
+#include <limits>
 using namespace std;
 
 int main()
 {
-    unsigned int base, exponent;
-    unsigned int result = 1;
+    int size, num;
+    int max = numeric_limits<int>::min();
+    int min = numeric_limits<int>::max();
 
-    cout << "밑을 음수가 아닌 정수로 입력하세요: ";
-    cin >> base;
-    cout << "지수를 음수가 아닌 정수로 입력하세요: ";
-    cin >> exponent;
-
-    for(int i = 1; i <= exponent; i++){
-        result *= base;
-    }
+    do
+    {
+        cout << "음수가 아닌 수를 리스트의 크기를 입력하세요: ";
+        cin >> size;
+    } while (size < 0);
     
-    cout << base << "^" << exponent << " = " << result << endl;
+    for(int i = 0; i < size; i++){
+        cout << "다음 숫자를 입력하세요: ";
+        cin >> num;
+
+        if(num > max){
+            max = num;
+        }
+        if(num < min){
+            min = num;
+        }
+    }
+
+    cout << "최솟값 = " << min << endl;
+    cout << "최댓값 = " << max << endl;
     return 0;
 }
