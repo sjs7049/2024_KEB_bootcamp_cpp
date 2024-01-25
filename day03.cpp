@@ -1,40 +1,22 @@
-
 #include <iostream>
 using namespace std;
 
+void pattern(int patternsize){
+    for(int i = 1; i <= patternsize; i++){
+        for(int j = 1; j <= patternsize; j++){
+            cout << "*";
+        }
+        cout << endl;
+    }
+}
+
 int main()
 {
-    int guess;
+    int patternSize;
+    
+    cout << "패턴의 크기를 입력하세요: ";
+    cin >> patternSize;
 
-    srand(time(0));
-    int n = rand() % (15 - 5 + 1) + 5;
-
-    int cnt = 1;
-    bool found = false;
-    while(cnt <= 5 && !found){
-        do
-        {
-            cout << "5~15 사이의 정수를 입력하세요: ";
-            cin >> guess;
-        } while (guess < 5 || guess > 15);
-
-        if(guess == n){
-            found = true;
-        }
-        else if(guess > n){
-            cout << "더 작은 숫자입니다." << endl;
-        }
-        else{
-            cout << "더 큰 숫자입니다. " << endl;
-        }
-        cnt++;
-    }
-
-    if(found){
-        cout << "축하합니다. 추측에 성공했습니다. 답 = " << n << endl;
-    }
-    else{
-        cout << "아쉽게 추측 실패했습니다. 답 = " << n << endl;
-    }
+    pattern(patternSize);
     return 0;
 }
