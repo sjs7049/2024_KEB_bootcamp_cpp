@@ -1,20 +1,22 @@
-// 팩토리얼 구현하기
+// 거듭제곱 곱하기
 
 #include <iostream>
 using namespace std;
 
 int main()
 {
-    int factorialSize;
-    unsigned long long result = 1;
+    unsigned int base, exponent;
+    unsigned int result = 1;
 
-    cout << "팩토리얼의 크기를 입력하세요: ";
-    cin >> factorialSize;
+    cout << "밑을 음수가 아닌 정수로 입력하세요: ";
+    cin >> base;
+    cout << "지수를 음수가 아닌 정수로 입력하세요: ";
+    cin >> exponent;
 
-    for(int i = factorialSize; i > 0; i--){
-        result *= i;
+    for(int i = 1; i <= exponent; i++){
+        result *= base;
     }
-
-    cout << factorialSize <<"! = " << result << endl;
+    
+    cout << base << "^" << exponent << " = " << result << endl;
     return 0;
 }
