@@ -34,7 +34,7 @@ int main()
         cout << "축하합니다. 추측에 성공했습니다. 답 = " << n << endl;
     }
     else{
-        cout << "아쉽게 추측에 실패했습니다. 답 = " << n << endl;
+        cout << "아쉽게 추측 실패했습니다. 답 = " << n << endl;
     }
     return 0;
 }
