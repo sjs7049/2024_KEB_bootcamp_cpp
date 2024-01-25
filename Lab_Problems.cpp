@@ -1,9 +1,6 @@
-// 정기 예금의 미래 가치 찾기
-// 미래 가치 = 투자한 가치 * (1 + 이율)^(기간)
+// 정기 적금의 미래 가치 찾기
 
-// 요소 = (1 + 이율)
-// 승수 = 요소^기간
-// 미래 가치 = 투자한 가치 * 승수
+// 승수 = (1 + 인수)^n + (1 + 인수)^(n-1) + ... + (1 + 인수)
 
 #include <iostream>
 #include <iomanip>
@@ -26,15 +23,18 @@ void input(double& invest, double& rate, double& term){
     // 참조로 전달을 사용해서 변수 3개(투자한 가치, 이율, 기간)에 값을 할당해서 main 함수에 전달
     // 입력을 받기 위해서 별도의 함수 getInput 함수 만들고 활용
 
-    invest = getInput("투자 금액을 입력하세요: ");
+    invest = getInput("정기 적금에 투자할 금액을 입력하세요: ");
     rate = getInput("1년 마다의 이율을 입력하세요: ");
     term = getInput("몇 년마다 넣을지 입력하세요: ");
 }
 
 double findMultiplier(double rate, double term){
-    // 승수 = 요소^기간
-    double multiplier;
-    multiplier = pow((1 + rate / 100), term);
+    // 승수 = (1 + 인수)^n + (1 + 인수)^(n-1) + ... + (1 + 인수)
+    double multiplier = 0.00;
+    for(int i = term; i > 0; i--){
+        multiplier += pow((1 + rate / 100), i);
+    }
+
     return multiplier;
 }
 
@@ -48,8 +48,8 @@ void process(double invest, double rate, double term, double& multiplier, double
 
 void printData(double invest, double rate, double term){
     cout << fixed << setprecision(2);
-    cout << "투자 정보" << endl;
-    cout << "투자 금액: " << invest << endl;
+    cout << "\n정기 적금 정보" << endl;
+    cout << "정기 적금 투자 금액: " << invest << endl;
     cout << "이율: " << rate << "% 연 마다" << endl;
     cout << "기간: " << term << "년" << endl;
 }
