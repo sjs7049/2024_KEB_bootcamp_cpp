@@ -1,38 +1,78 @@
-// 적어도 또는 모두 조건에 충족하는 숫자 찾기
-/*
-결과
-리스트의 크기를 입력하세요: 5
-다음 숫자를 입력하세요: 12
-다음 숫자를 입력하세요: 32
-다음 숫자를 입력하세요: 28
-28은(는) 7로 나눌 수 있습니다.
-*/
+// 정기 예금의 미래 가치 찾기
+// 미래 가치 = 투자한 가치 * (1 + 이율)^(기간)
+
+// 요소 = (1 + 이율)
+// 승수 = 요소^기간
+// 미래 가치 = 투자한 가치 * 승수
 
 #include <iostream>
+#include <iomanip>
+#include <cmath>
 using namespace std;
 
-int main()
-{
-    int size, num;
-    bool found = false;
+double getInput(string message){
+    double input;
 
     do
     {
-        cout << "리스트의 크기를 입력하세요: ";
-        cin >> size;
-    } while(size < 0);
+        cout << message;
+        cin >> input;
+    } while (input < 0.0);
+    
+    return input;
+}
 
-    for(int i = 0; (i < size) && (!found); i++){
-        cout << "다음 숫자를 입력하세요: ";
-        cin >> num;
-        found = (num % 7 == 0);
-    }
+void input(double& invest, double& rate, double& term){
+    // 참조로 전달을 사용해서 변수 3개(투자한 가치, 이율, 기간)에 값을 할당해서 main 함수에 전달
+    // 입력을 받기 위해서 별도의 함수 getInput 함수 만들고 활용
 
-    if(found){
-        cout << num << "은(는) 7로 나눌 수 있습니다." << endl;
-    }
-    else{
-        cout << "리스트 내부에 7로 나눌 수 있는 숫자가 없습니다." << endl;
-    }
+    invest = getInput("투자 금액을 입력하세요: ");
+    rate = getInput("1년 마다의 이율을 입력하세요: ");
+    term = getInput("몇 년마다 넣을지 입력하세요: ");
+}
+
+double findMultiplier(double rate, double term){
+    // 승수 = 요소^기간
+    double multiplier;
+    multiplier = pow((1 + rate / 100), term);
+    return multiplier;
+}
+
+void process(double invest, double rate, double term, double& multiplier, double& futurevalue){
+    // 미래 가치 계산, 5개의 변수(3개는 input함수에서 입력 받은 거, 2개는 승수와 미래 가치를 참조로)
+    // 내부적으로 findMultiplier 함수 호출해서 승수 계산, 모든 변수 활용해서 미래 가치 계산
+    // 미래 가치 = 투자한 가치 * 승수
+    multiplier = findMultiplier(rate, term);
+    futurevalue = invest * multiplier;
+}
+
+void printData(double invest, double rate, double term){
+    cout << fixed << setprecision(2);
+    cout << "투자 정보" << endl;
+    cout << "투자 금액: " << invest << endl;
+    cout << "이율: " << rate << "% 연 마다" << endl;
+    cout << "기간: " << term << "년" << endl;
+}
+
+void printResult(double multiplier, double futurevalue){
+    cout << "투자의 승수 = " << setprecision(8) << multiplier << endl;
+    cout << "미래 가치 = " << setprecision(2) << futurevalue << endl;
+}
+
+
+void output(double invest, double rate, double term, double multiplier, double futurevalue){
+    printData(invest, rate, term);
+    cout << endl;
+    printResult(multiplier, futurevalue);
+}
+
+int main()
+{
+    double invest, rate, term;
+    double multiplier, futurevalue;
+
+    input(invest, rate, term);
+    process(invest, rate, term, multiplier, futurevalue);
+    output(invest, rate, term, multiplier, futurevalue);
     return 0;
 }
