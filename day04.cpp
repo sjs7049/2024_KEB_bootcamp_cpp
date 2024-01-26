@@ -1,59 +1,41 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
-class Circle
+class RandomInteger
 {
 private:
-    double radius;
+    int low;
+    int high;
+    int value;
 public:
-    Circle(double r)
-        : radius(r){
-        cout << "매개변수가 있는 생성자가 호출되었습니다." << endl;
+    RandomInteger(int l, int h)
+        : low(l), high(h) 
+    {
+        srand(time(0));
+        value =  rand() % (high - low + 1) + low;
     }
-    Circle()
-        : radius(0.0){
-        cout << "기본 생성자가 호출되었습니다." << endl;
-    }
-    ~Circle(){
-        cout << "소멸자가 호출되었씁니다: " << radius << endl;
-    }
-    Circle(const Circle& circle)
-        : radius(circle.radius){
-        cout << "복사 생성자가 호출되었습니다." << endl;
-    }
-    void setRadius(double r){
-        radius = r;
-    }
-    double getRadius() const{
-        return radius;
-    }
-    double getPerimeter() const{
-        return 2 * 3.14 * radius;
-    }
-    double getArea() const{
-        return 3.14 * radius * radius;
+    ~RandomInteger() {}
+    RandomInteger(const RandomInteger& random) = delete;
+    void print() const{
+        cout << value << endl;
     }
 };
 
+
 int main()
 {
-    Circle circle1(5.2);
-    cout << "Radius: " << circle1.getRadius() << endl;
-    cout << "Area: " << circle1.getArea() << endl;
-    cout << "Perimeter: " << circle1.getPerimeter() << endl;
-    cout << endl;
+    RandomInteger randominteger1(100, 200);
+    cout << "100~200 사이의 랜덤한 숫자: " ;
+    randominteger1.print();
 
-    Circle circle2(circle1);
-    cout << "Radius: " << circle2.getRadius() << endl;
-    cout << "Area: " << circle2.getArea() << endl;
-    cout << "Perimeter: " << circle2.getPerimeter() << endl;
-    cout << endl;
+    RandomInteger randominteger2(400, 600);
+    cout << "400~600 사이의 랜덤한 숫자: " ;
+    randominteger2.print();
 
-    Circle circle3;
-    cout << "Radius: " << circle3.getRadius() << endl;
-    cout << "Area: " << circle3.getArea() << endl;
-    cout << "Perimeter: " << circle3.getPerimeter() << endl;
-    cout << endl;
+    RandomInteger randominteger3(1500, 2000);
+    cout << "1500~2000 사이의 랜덤한 숫자: " ;
+    randominteger3.print();
 
     return 0;
 }
