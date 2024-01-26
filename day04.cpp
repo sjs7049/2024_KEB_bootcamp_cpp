@@ -1,41 +1,53 @@
-#include <iostream>
-#include <cstdlib>
-using namespace std;
+#include "circle.h"
+#include <cassert>
 
-class RandomInteger
-{
-private:
-    int low;
-    int high;
-    int value;
-public:
-    RandomInteger(int l, int h)
-        : low(l), high(h) 
-    {
-        srand(time(0));
-        value =  rand() % (high - low + 1) + low;
+Circle::Circle(double rds)
+: radius(rds){
+    if(radius < 0.0){
+        assert(false);
     }
-    ~RandomInteger() {}
-    RandomInteger(const RandomInteger& random) = delete;
-    void print() const{
-        cout << value << endl;
-    }
-};
+}
 
+Circle::Circle()
+: radius(0.0){
+
+}
+
+Circle::Circle(const Circle& circle)
+: radius(circle.radius){
+
+}
+
+Circle::~Circle(){
+
+}
+
+void Circle::setRadius(double r){
+    radius = r;
+    if(radius < 0.0){
+        assert(false);
+    }
+}
+
+double Circle::getRadius() const{ return radius; }
+double Circle::getArea() const{ return 3.14 * radius * radius; }
+double Circle::getPerimeter() const{return 2 * 3.14 * radius; }
 
 int main()
 {
-    RandomInteger randominteger1(100, 200);
-    cout << "100~200 사이의 랜덤한 숫자: " ;
-    randominteger1.print();
+    Circle circle1(5.2);
+    cout << "Radius: " << circle1.getRadius() << endl;
+    cout << "Area: " << circle1.getArea() << endl;
+    cout << "Perimeter: " << circle1.getPerimeter() << endl << endl;
 
-    RandomInteger randominteger2(400, 600);
-    cout << "400~600 사이의 랜덤한 숫자: " ;
-    randominteger2.print();
+    Circle circle2(circle1);
+    cout << "Radius: " << circle2.getRadius() << endl;
+    cout << "Area: " << circle2.getArea() << endl;
+    cout << "Perimeter: " << circle2.getPerimeter() << endl << endl;
 
-    RandomInteger randominteger3(1500, 2000);
-    cout << "1500~2000 사이의 랜덤한 숫자: " ;
-    randominteger3.print();
-
+    Circle circle3;
+    cout << "Radius: " << circle3.getRadius() << endl;
+    cout << "Area: " << circle3.getArea() << endl;
+    cout << "Perimeter: " << circle3.getPerimeter() << endl << endl;
     return 0;
 }
