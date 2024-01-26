@@ -1,32 +1,41 @@
-// 4-4 차량의 종류(일반 승용차는 'c', 버스는 'b', 트럭은 't')와 주차장에서 차량이 있던
-// 시간을 입력한 뒤, 다음과 같은 주차 요금에 따라서 요금을 계산하는 프로그램을 작성하세요.
-
-// 일반 승용차: 시간당 2달러, 버스: 시간당 3달러, 트럭: 시간당 4달러
+// 4-5. 학생의 점수를 기반으로 학점을 구하는 프로그램을 만드세요.
+// 점수는 0~100점 기준으로 3개를 읽어 들이고, 다음 기준에 따라 요금 계산하는 프로그램을 만드세요.
 
 #include <iostream>
-#include <string>
+#include <iomanip>
 using namespace std;
 
 int main()
 {
-    char vehicleType;
-    int time, fee;
+    int score1, score2, score3;
+    double totalScore;
+    double average;
 
-    cout << "차량의 종류와 있던 시간 입력: ";
-    cin >> vehicleType >> time;
+    cout << "점수 3개를 입력하세요: ";
+    cin >> score1 >> score2 >> score3;
 
-    switch (vehicleType)
-    {
-    case 'c':
-        fee = time * 2;
-        break;
-    case 'b':
-        fee = time * 3;
-        break;
-    case 't':
-        fee = time * 4;
-        break;
+    totalScore = score1 + score2 + score3;
+    average = static_cast<double> (totalScore) / 3;
+    cout << fixed << setprecision(2) << average << endl;
+
+    if(average > 90){
+        cout << "A" << endl;
     }
-    cout << "주차 요금은 " << fee << "달러" << endl;
+    else if(average >= 80){
+        if(score3 > 90){ cout << "A" << endl; }
+        else{ cout << "B" << endl; }
+    }
+    else if(average >= 70){
+        if(score3 > 80){ cout << "B" << endl; }
+        else{ cout << "C" << endl; }
+    }
+    else if(average >= 60){
+        if(score3 > 70){ cout << "C" << endl; }
+        else{ cout << "D" << endl; }
+    }
+    else{
+        if(score3 > 60){ cout << "D" << endl; }
+        else{ cout << "F" << endl; }
+    }
     return 0;
 }
