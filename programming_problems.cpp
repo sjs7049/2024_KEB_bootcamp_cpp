@@ -1,29 +1,32 @@
-// 4-6. 대학교에서 학생의 총 수업료를 계산하고 출력하는 프로그램을 만드세요.
-// 학생들은 최대 12학점에 대해 학점당 10달러의 수수료를 지불합니다.
-// 12학점을 넘는 분량은 수수료가 없습니다. 등록비는 학생당 10달러라 가정
+// 4-7. 도매점에서 물건을 구매할 때, 다음과 같이 수량에 따라 추가적인 할인이 들어갑니다.
+// 물건 하나의 가격과 구매 수량을 입력받고, 할인이 적용된 전체 가격을 출력하는 프로그램을 만드세요.
+
+// 1~9개: 0%, 10~49개: 3%, 50~99개: 5%, 100개 이상: 10%
 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main()
 {
-    int grades, tuition;
-    int registrationFee = 10;
-    int charge = 0;
+    int price, purchaseQuantity;
+    double totalPrice;
 
-    cout << "학점을 입력하세요: ";
-    cin >> grades;
+    cout << "물건 하나의 가격과 구매 수량을 입력하세요: ";
+    cin >> price >> purchaseQuantity;
 
-    for(int i = 0; i < grades; i++){
-        if(grades > 12){
-            charge = 120;
-        }
-        else{
-            charge += 10;
-        }
+    if(purchaseQuantity >= 1 && purchaseQuantity < 10){
+        totalPrice = (price * purchaseQuantity);
     }
-
-    tuition = registrationFee + charge;
-    cout << "학생의 총 수업료: " << tuition << "달러" << endl;
-    return 0;
+    else if(purchaseQuantity >= 10 && purchaseQuantity < 50){
+        totalPrice = (price * purchaseQuantity) * (1.0 - 0.03);
+    }
+    else if(purchaseQuantity >= 50 && purchaseQuantity < 100){
+        totalPrice = (price * purchaseQuantity) * (1.0 - 0.05);
+    }
+    else{
+        totalPrice = (price * purchaseQuantity) * (1.0 - 0.10);
+    }
+    cout << "할인이 적용된 전체 가격: " << totalPrice << endl;
+    return 0; 
 }
