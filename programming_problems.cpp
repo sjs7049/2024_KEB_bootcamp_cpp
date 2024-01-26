@@ -1,41 +1,29 @@
-// 4-5. 학생의 점수를 기반으로 학점을 구하는 프로그램을 만드세요.
-// 점수는 0~100점 기준으로 3개를 읽어 들이고, 다음 기준에 따라 요금 계산하는 프로그램을 만드세요.
+// 4-6. 대학교에서 학생의 총 수업료를 계산하고 출력하는 프로그램을 만드세요.
+// 학생들은 최대 12학점에 대해 학점당 10달러의 수수료를 지불합니다.
+// 12학점을 넘는 분량은 수수료가 없습니다. 등록비는 학생당 10달러라 가정
 
 #include <iostream>
-#include <iomanip>
 using namespace std;
 
 int main()
 {
-    int score1, score2, score3;
-    double totalScore;
-    double average;
+    int grades, tuition;
+    int registrationFee = 10;
+    int charge = 0;
 
-    cout << "점수 3개를 입력하세요: ";
-    cin >> score1 >> score2 >> score3;
+    cout << "학점을 입력하세요: ";
+    cin >> grades;
 
-    totalScore = score1 + score2 + score3;
-    average = static_cast<double> (totalScore) / 3;
-    cout << fixed << setprecision(2) << average << endl;
+    for(int i = 0; i < grades; i++){
+        if(grades > 12){
+            charge = 120;
+        }
+        else{
+            charge += 10;
+        }
+    }
 
-    if(average > 90){
-        cout << "A" << endl;
-    }
-    else if(average >= 80){
-        if(score3 > 90){ cout << "A" << endl; }
-        else{ cout << "B" << endl; }
-    }
-    else if(average >= 70){
-        if(score3 > 80){ cout << "B" << endl; }
-        else{ cout << "C" << endl; }
-    }
-    else if(average >= 60){
-        if(score3 > 70){ cout << "C" << endl; }
-        else{ cout << "D" << endl; }
-    }
-    else{
-        if(score3 > 60){ cout << "D" << endl; }
-        else{ cout << "F" << endl; }
-    }
+    tuition = registrationFee + charge;
+    cout << "학생의 총 수업료: " << tuition << "달러" << endl;
     return 0;
 }
