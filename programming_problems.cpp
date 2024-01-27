@@ -1,15 +1,21 @@
-// 6-10. 1~10 범위의 정수로 사용해서 log2^x
-// log2^x = log10^x / log10^2
+// 6-11. 도씨 온도를 매개변수로 받아서, 화씨 온도를 리턴하는 함수를 작성하세요.
+// 0, 37, 40, 100도씨가 몇 화씨에 해당하는지 구해서 출력하세요.
+// 화씨 = 도씨 * 180.0 / 100.0 + 32
 
 #include <iostream>
-#include <cmath>
 using namespace std;
+
+double returnFahrenheit(int paraCelsius){
+    double fahrenheit = paraCelsius * 180.0 / 100.0 + 32.0;
+
+    return fahrenheit;
+}
 
 int main()
 {
-    for(int i = 1; i <= 10; i++){
-        cout << log10(i) / log10(2) << " ";
-    }
-    cout << endl;
+    cout << returnFahrenheit(0) << endl;
+    cout << returnFahrenheit(37) << endl;
+    cout << returnFahrenheit(40) << endl;
+    cout << returnFahrenheit(100) << endl;
     return 0;
 }
