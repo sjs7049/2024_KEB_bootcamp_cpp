@@ -5,17 +5,16 @@
 #include <iostream>
 using namespace std;
 
-double returnFahrenheit(int paraCelsius){
-    double fahrenheit = paraCelsius * 180.0 / 100.0 + 32.0;
-
-    return fahrenheit;
+int returnCelsius(double paraFahrenheit){
+    int celsius = (paraFahrenheit - 32) * (100.0 / 180.0);
+    return celsius;
 }
 
 int main()
 {
-    cout << returnFahrenheit(0) << endl;
-    cout << returnFahrenheit(37) << endl;
-    cout << returnFahrenheit(40) << endl;
-    cout << returnFahrenheit(100) << endl;
+    cout << returnCelsius(32) << endl;
+    cout << returnCelsius(98.6) << endl;
+    cout << returnCelsius(104) << endl;
+    cout << returnCelsius(212) << endl;
     return 0;
 }
