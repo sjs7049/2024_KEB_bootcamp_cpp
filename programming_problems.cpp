@@ -1,22 +1,24 @@
-// 5-16. 0~99의 범위에 있는 모든 정수 도씨 온도(Celsius)를 화씨 온도(Fahrenheit)로 
-// 변환해서 표 형태로 출력하는 프로그램을 만드세요.
-// 화씨 = 도씨 * 1.8 + 32
+// 6-5. 랜덤 숫자 생성기의 동작을 확인해볼 수 있게 10~99 범위의 숫자 10개로 5개의 세트를 만들고, 
+// 각 세트의 합을 구하는 프로그램을 만드세요. 
 
 #include <iostream>
-#include <iomanip>
+#include <cstdlib>
 using namespace std;
 
 int main()
 {
-    int celsius;
+    srand(time(0));
 
-    do
-    {
-        cout << "Input the Celsius between 0 and 99: ";
-        cin >> celsius;
-    } while(celsius < 0 || celsius > 99);
-
-    double fahrenheit = celsius * 1.8 + 32.0;
-    cout << "The Fahrenheit of " << celsius << "C is " << fahrenheit << "F" << endl;
+    int cnt = 0;
+    while(cnt < 5){
+        int sum = 0;
+        for(int i = 0; i < 10; i++){
+            int tmp = rand() % (99 - 10 + 1) + 10;
+            sum += tmp;
+        }
+        cnt++;
+        cout << sum << " ";
+    }
+    cout << endl;
     return 0;
 }
