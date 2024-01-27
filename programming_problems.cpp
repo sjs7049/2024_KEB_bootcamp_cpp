@@ -1,28 +1,44 @@
-// 5-4. 0을 센티넬로 사용해서 사용자로부터 양의 정수와 음의 정수 리스트를 읽어 들이는 프로그램을 만드세요.
-// 양의 정수가 몇 개 입력되었는지, 음의 정수가 몇 개 입력되었는지 출력합니다.
+// 5-5. 사용자에게 두 양의 정수를 입력받고 두 정수를 범위로 내부에 있는 
+// 홀수와 짝수를 출력하는 프로그램을 만드세요.
 
 #include <iostream>
 using namespace std;
 
 int main()
 {   
-    int integer;
-    int positiveIntCnt{0}, negativeIntCnt{0};
+    int num1, num2;
 
     do
     {
-        cout << "Input the integer: ";
-        cin >> integer;
+        cout << "Input the first positive integer: ";
+        cin >> num1;
+    } while (num1 <= 0);
 
-        if(integer > 0){
-            positiveIntCnt++;
+    do
+    {
+        cout << "Input the second positive integer: ";
+        cin >> num2;
+    } while (num2 <= 0);
+
+    if(num1 > num2){
+        int tmp = num1;
+        num1 = num2;
+        num2 = tmp;        
+    }  
+
+    cout << "\nOdd and even numbers between " << num1 << " and " << num2 << endl;
+    cout << "Even numbers: ";
+    for(int i = (num1 + 1); i < num2; i++){
+        if(i % 2 == 0){
+            cout << i << " ";
         }
-        else if(integer < 0){
-            negativeIntCnt++;
+    }
+    cout << "\nOdd numbers: ";
+    for(int i = (num1 + 1); i < num2; i++){
+        if(i % 2 != 0){
+            cout << i << " ";
         }
-    } while (integer == 0);
-    
-    cout << "The number of positive integers is " << positiveIntCnt << endl;
-    cout << "The number of negative integers is " << negativeIntCnt << endl;
+    }
+    cout << endl;
     return 0;
 }
