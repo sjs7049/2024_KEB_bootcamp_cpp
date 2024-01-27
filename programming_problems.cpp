@@ -1,15 +1,26 @@
-// 5-12. 2000년부터 2009년까지의 범위에 있는 윤년을 출력하는 프로그램을 만드세요.
-// 1년을 400으로 나눌 수 있다면 윤년입니다. 또는 4로 나눌 수 있지만 100으로 나눌 수 없으면 윤년입니다.
+// 5-13. 사용자로부터 양의 정수를 입력받고 모든 자릿수의 합을 구하는 프로그램을 만드세요.
 
 #include <iostream>
 using namespace std;
 
 int main()
 {
-    for(int i = 2000; i <= 2009; i++){
-        if((i % 400 == 0) || (i % 4 == 0 && i % 100 != 0)){
-            cout << i << " ";
-        }
+    int n, tmp;
+    int sum = 0;
+
+    do
+    {
+        cout << "Input the positive integer: ";
+        cin >> n;
+    } while (n <= 0);
+
+    while (n != 0)
+    {
+        tmp = n % 10; 
+        sum += tmp;
+        n /= 10;
     }
+    
+    cout << "The sum of all digits is " << sum << endl;
     return 0;
 }
