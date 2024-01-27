@@ -1,67 +1,48 @@
-// 4-9. [프로그램 4-17]에 윤년의 개념을 추가해서 프로그램 수정하세요.
-// 프로그램은 사용자로부터 추가 연도를 입력받으세요.
+// 4-11. 사용자로부터 달러 값을 입력받고, 달러 지폐로 이를 지불할 때 지폐의 개수가 
+// 최소가 되는 경우를 출력하는 프로그램을 만드세요. 0이 아닌 수의 지폐 수만 출력하면 됩니다.
+// 달러는 100달러, 50달러, 20달러, 10달러, 5달러, 1달러 지폐가 있습니다.
 
+// 425달러: 100달러 4개, 20달러 1개, 5달러 1개
 #include <iostream>
 using namespace std;
 
 int main()
 {
-    int year;
-    int month;
-    int day;
-    int totalDays = 0;
+    int dollars;
 
-    cout << "몇 년인지 입력하세요: ";
-    cin >> year;
-    cout << "몇 월인지 입력하세요: ";
-    cin >> month;
-    cout << "며칠인지 입력하세요: "; 
-    cin >> day;
+    cout << "Input the dollars: ";
+    cin >> dollars;
 
-    bool leapYear;
-    if((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))){
-        leapYear = true;
-    }
-    else{
-        leapYear = false;
-    }
+    int cnt100 = dollars / 100;
+    dollars %= 100;
+    int cnt50 = dollars / 50;
+    dollars %= 50;
+    int cnt20 = dollars / 20;
+    dollars %= 20;
+    int cnt10 = dollars / 10;
+    dollars %= 10;
+    int cnt5 = dollars / 5;
+    dollars %= 5;
+    int cnt1 = dollars;
 
-    int m01 = 31;
-    int m02;
-    if(leapYear){
-        m02 = 29;
+    if(cnt100 > 0){
+        cout << "The number of 100 dollars is " << cnt100 << endl;
     }
-    else{
-        m02 = 28;
+    if(cnt50 > 0){
+        cout << "The number of 50 dollars is " << cnt50 << endl;
     }
-    int m03 = 31;
-    int m04 = 30;
-    int m05 = 31;
-    int m06 = 30;
-    int m07 = 31;
-    int m08 = 31;
-    int m09 = 30;
-    int m10 = 31;
-    int m11 = 30;
-
-    switch(month)
-    {
-    case 12 : totalDays += m11;
-    case 11 : totalDays += m10;
-    case 10 : totalDays += m09;
-    case 9  : totalDays += m08;
-    case 8  : totalDays += m07;
-    case 7  : totalDays += m06;
-    case 6  : totalDays += m05;
-    case 5  : totalDays += m04;
-    case 4  : totalDays += m03;
-    case 3  : totalDays += m02;
-    case 2  : totalDays += m01;
-    case 1  : totalDays += 0;
+    if(cnt20 > 0){
+        cout << "The number of 20 dollars is " << cnt20 << endl;
     }
-
-    totalDays +=  day;
-    cout << leapYear << endl;
-    cout << "올해의 " << totalDays << "번째 날입니다.";
-    return 0;      
+    if(cnt10 > 0){
+        cout << "The number of 10 dollars is " << cnt10 << endl;
+    }
+    if(cnt5 > 0){
+        cout << "The number of 5 dollars is " << cnt5 << endl;
+    }
+    if(cnt1 > 0){
+        cout << "The number of 1 dollars is " << cnt1 << endl;
+    }
+    
+    return 0;
 }
