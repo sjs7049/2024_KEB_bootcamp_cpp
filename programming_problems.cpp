@@ -1,33 +1,32 @@
-// 5-10. 다음 알고리즘을 사용해서 두 정수 m과 n의 최대 공약수를 구하는 프로그램을 만드세요.
-// m = m-n을 하고, m<n이면 m과 n을 교체
-// n이 0이 될 때까지 전 단계를 반복, 최종적으로 최대 공약수는 m
-// 9와 12, 7과 11, 12와 140 사용해서 예제 실행해보기
+// 5-11. 0~100의 범위에 있는 점수 리스트를 읽어 들이고, 가장 작은 점수와 가장 큰 점수를 출력하세요.
+// 사용자로부터 점수를 읽어 들일 때는 적어도 1개, 그리고 10개 이하로만 읽어 들이게 하세요.
 
 #include <iostream>
 using namespace std;
 
 int main()
-{   
-    int m, n;
+{
+    int score;
+    int max{0}, min{100};
+    int cnt = 0;
 
-    cout << "Input the first number: ";
-    cin >> m;
-    cout << "Input the second number: ";
-    cin >> n;
-
-    while (n != 0) {
-        int temp = m;
-        m = n;
-        n = temp % n;
-
-        if (m < n) {
-            // m과 n을 교체
-            int temp = m;
-            m = n;
-            n = temp;
+    cout << "Input the number between 0 and 100: ";
+    while(cin >> score){
+        cnt++;
+        if(cnt > 0 && cnt <=10){
+            if(score > max){
+            max = score;
+            }
+            if(score < min){
+                min = score;
+            }
+            cout << "Input the number between 0 and 100: ";
+        }
+        else{
+            break;
         }
     }
-
-    cout << "두 정수의 최대공약수는 " << m << endl;
+    cout << "\nThe max of scores is " << max << endl;
+    cout << "The min of scores is " << min << endl;
     return 0;
 }
