@@ -1,5 +1,6 @@
-// 6-5. 랜덤 숫자 생성기의 동작을 확인해볼 수 있게 10~99 범위의 숫자 10개로 5개의 세트를 만들고, 
-// 각 세트의 합을 구하는 프로그램을 만드세요. 
+// 6-6. 동전을 던졌을 때 앞면 또는 뒷면이 나오는 것처럼, rand 함수를 사용해서 0 또는 1만
+// 나오게 하는 코드를 작성하고, 이를 활용해서 동전을 100만번 던지고
+// 앞면과 뒷면이 몇 번 나오는지 모방해서 확인하는 프로그램을 작성하세요. 
 
 #include <iostream>
 #include <cstdlib>
@@ -8,17 +9,18 @@ using namespace std;
 int main()
 {
     srand(time(0));
+    int frontCnt{0}, backCnt{0};
 
-    int cnt = 0;
-    while(cnt < 5){
-        int sum = 0;
-        for(int i = 0; i < 10; i++){
-            int tmp = rand() % (99 - 10 + 1) + 10;
-            sum += tmp;
+    for(int i = 0; i < 1000000; i++){
+        int coin = rand() % (1 - 0 + 1);
+        if(coin == 0){
+            frontCnt++;
         }
-        cnt++;
-        cout << sum << " ";
+        else{
+            backCnt++;
+        }
     }
-    cout << endl;
+    cout << "앞면: " << frontCnt << endl;
+    cout << "뒷면: " << backCnt << endl;
     return 0;
 }
