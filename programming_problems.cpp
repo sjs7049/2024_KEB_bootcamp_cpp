@@ -1,38 +1,28 @@
-// 5-3 1000보다 작은 숫자들을 키보드로 읽어 들인 후 그 합과 평균을 구하는 프로그램을 만드세요.
-// 입력은 1000이라는 센티넬을 만날 때 정지합니다.
+// 5-4. 0을 센티넬로 사용해서 사용자로부터 양의 정수와 음의 정수 리스트를 읽어 들이는 프로그램을 만드세요.
+// 양의 정수가 몇 개 입력되었는지, 음의 정수가 몇 개 입력되었는지 출력합니다.
 
 #include <iostream>
-#include <iomanip>
 using namespace std;
 
 int main()
-{
-    int num;
-    int cnt = 0;
-    int totalNumber = 0;
-    double average;
+{   
+    int integer;
+    int positiveIntCnt{0}, negativeIntCnt{0};
 
-    while(num != 1000){
-        do
-        {
-            cout << "Input the number less than 1000: ";
-            cin >> num;
-        } while (num > 1000);
-        
-        if(num > 1000){
-            continue;
+    do
+    {
+        cout << "Input the integer: ";
+        cin >> integer;
+
+        if(integer > 0){
+            positiveIntCnt++;
         }
-        else{
-            cnt++;
-            totalNumber += num;
+        else if(integer < 0){
+            negativeIntCnt++;
         }
-    }
-    totalNumber -= 1000;
-    average = static_cast<double> (totalNumber) / (cnt - 1);
-
-    cout << fixed << setprecision(2);
-    cout << "The sum of numbers is " << totalNumber << endl;
-    cout << "The average of numbers is " << average << endl;
-
+    } while (integer == 0);
+    
+    cout << "The number of positive integers is " << positiveIntCnt << endl;
+    cout << "The number of negative integers is " << negativeIntCnt << endl;
     return 0;
 }
