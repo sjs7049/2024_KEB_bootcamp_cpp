@@ -1,56 +1,38 @@
-// 5-2. 사용자로부터 패턴의 종류와 크기를 입력받고 다음과 같은 패턴을 출력하는 프로그램을 만드세요.
+// 5-3 1000보다 작은 숫자들을 키보드로 읽어 들인 후 그 합과 평균을 구하는 프로그램을 만드세요.
+// 입력은 1000이라는 센티넬을 만날 때 정지합니다.
 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main()
 {
-    int type, size;
+    int num;
+    int cnt = 0;
+    int totalNumber = 0;
+    double average;
 
-    do
-    {
-        cout << "Input the pattern type number: ";
-        cin >> type;
-    } while (type < 0 || type > 2);
-
-    do
-    {
-        cout << "Input the pattern size: ";
-        cin >> size;
-    } while (size < 0 || size > 9);
-
-    switch (type)
-    {
-    case 1:
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < i; j++){
-                cout << " ";
-            }
-            for(int k = 2*size; k > (2*i+1); k--){
-                cout << "*";
-            }
-             for(int l = 0; l < i; l++){
-                cout << " ";
-            }
-            cout << endl;
+    while(num != 1000){
+        do
+        {
+            cout << "Input the number less than 1000: ";
+            cin >> num;
+        } while (num > 1000);
+        
+        if(num > 1000){
+            continue;
         }
-        break;
-    case 2:
-        for(int i = 0; i < size; i++){
-            for(int j = size; j > i; j--){
-                cout << " ";
-            }
-            for(int k = 0; k < (2*i+1); k++){
-                cout << "*";
-            }
-            for(int l = size; l > i; l--){
-                cout << " ";
-            }
-            cout << endl;
+        else{
+            cnt++;
+            totalNumber += num;
         }
-        break;
-    default:
-        break;
     }
+    totalNumber -= 1000;
+    average = static_cast<double> (totalNumber) / (cnt - 1);
+
+    cout << fixed << setprecision(2);
+    cout << "The sum of numbers is " << totalNumber << endl;
+    cout << "The average of numbers is " << average << endl;
+
     return 0;
 }
