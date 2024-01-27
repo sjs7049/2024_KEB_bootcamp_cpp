@@ -1,4 +1,4 @@
-// 5-1. 사용자로부터 패턴의 종류(1~4)와 크기(1~9)를 입력받고 다음과 같은 패턴을 출력하는 프로그램을 만드세요.
+// 5-2. 사용자로부터 패턴의 종류와 크기를 입력받고 다음과 같은 패턴을 출력하는 프로그램을 만드세요.
 
 #include <iostream>
 using namespace std;
@@ -11,7 +11,7 @@ int main()
     {
         cout << "Input the pattern type number: ";
         cin >> type;
-    } while (type < 0 || type > 4);
+    } while (type < 0 || type > 2);
 
     do
     {
@@ -23,44 +23,34 @@ int main()
     {
     case 1:
         for(int i = 0; i < size; i++){
-            for(int j = 1; j <= (i+1); j++){
+            for(int j = 0; j < i; j++){
+                cout << " ";
+            }
+            for(int k = 2*size; k > (2*i+1); k--){
                 cout << "*";
+            }
+             for(int l = 0; l < i; l++){
+                cout << " ";
             }
             cout << endl;
         }
         break;
     case 2:
-        for(int i = 1; i <= size; i++){
-            for(int j = 0; j < (i-1); j++){
-                cout << " ";
-            }
-            for(int k = size; k > (i-1) ; k--){
-                cout << "*";
-            }
-            cout << endl;
-        }
-        break;
-    case 3:
         for(int i = 0; i < size; i++){
-            for(int j = size; j > i ; j--){
-                cout << "*";
-            }
-            cout << endl;
-        }
-        break;
-    case 4:
-        for(int i = 1; i <= size; i++){
-            for(int j = (size-1); j > (i-1); j--){
+            for(int j = size; j > i; j--){
                 cout << " ";
             }
-            for(int k = 1; k <= i ; k++){
+            for(int k = 0; k < (2*i+1); k++){
                 cout << "*";
+            }
+            for(int l = size; l > i; l--){
+                cout << " ";
             }
             cout << endl;
         }
         break;
-    
     default:
         break;
     }
+    return 0;
 }
