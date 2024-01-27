@@ -18,12 +18,22 @@ int main()
     cout << "며칠인지 입력하세요: "; 
     cin >> day;
 
-    bool leapYear = (year % 400) || (year % 4 && ! (year % 100));
+    bool leapYear;
+    if((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))){
+        leapYear = true;
+    }
+    else{
+        leapYear = false;
+    }
 
     int m01 = 31;
     int m02;
-    if(leapYear){ m02 = 29; }
-    else{ m02 = 28; }
+    if(leapYear){
+        m02 = 29;
+    }
+    else{
+        m02 = 28;
+    }
     int m03 = 31;
     int m04 = 30;
     int m05 = 31;
