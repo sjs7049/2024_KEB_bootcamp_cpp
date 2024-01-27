@@ -1,35 +1,33 @@
-// 5-9. 1~100의 범위에 있는 양의 정수 2개를 읽어 들이고 공약수를 출력하세요.
+// 5-10. 다음 알고리즘을 사용해서 두 정수 m과 n의 최대 공약수를 구하는 프로그램을 만드세요.
+// m = m-n을 하고, m<n이면 m과 n을 교체
+// n이 0이 될 때까지 전 단계를 반복, 최종적으로 최대 공약수는 m
+// 9와 12, 7과 11, 12와 140 사용해서 예제 실행해보기
 
 #include <iostream>
 using namespace std;
 
 int main()
 {   
-    int num1, num2;
+    int m, n;
 
-    do
-    {
-        cout << "Input the first positive integer between 1 and 100: ";
-        cin >> num1;
-    } while(num1 <= 0);
+    cout << "Input the first number: ";
+    cin >> m;
+    cout << "Input the second number: ";
+    cin >> n;
 
-    do
-    {
-        cout << "Input the second positive integer between 1 and 100: ";
-        cin >> num2;
-    } while(num2 <= 0);
+    while (n != 0) {
+        int temp = m;
+        m = n;
+        n = temp % n;
 
-    if(num1 > num2){
-        int tmp = num1;
-        num1 = num2;
-        num2 = tmp;
-    }
-
-    for(int i = 1; i <= num1; i++){
-        if((num1 % i == 0) && (num2 % i == 0)){
-            cout << i << " ";
+        if (m < n) {
+            // m과 n을 교체
+            int temp = m;
+            m = n;
+            n = temp;
         }
     }
-    cout << endl;
+
+    cout << "두 정수의 최대공약수는 " << m << endl;
     return 0;
 }
