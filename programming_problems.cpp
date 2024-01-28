@@ -1,40 +1,44 @@
-// 7-4. 다음과 같은 멤버를 갖는 Person 클래스를 만드세요.
-// 데이터 멤버: name, age / 접근자 멤버 함수: getName, getAge
-// 설정자 멤버 함수: setName, setAge / 매개변수가 있는 생성자와 소멸자 포함
+// 7-5. 데이터 멤버로 houseNo, streetName, cityName, stateName, zipcode를 갖습니다.
+// 매개변수가 있는 생성자와 소멸자 정의하세요, 주소를 출력하는 접근자 함수 만드세요.
+// 예시 3708 S Las Vegas Blvd, Las Vegas, NV 89109
 
 #include <iostream>
 using namespace std;
 
-class Person
+class Address
 {
 public:
-    Person(string nameValue, int ageValue)
-    : name(nameValue), age(ageValue) {
-        cout << "이름과 나이가 생성되었습니다." << endl;
-    }
-    ~Person() {
-        cout << "이름과 나이가 소멸되었습니다." << endl;
-    }
-    void setName(string nameValue){ name = nameValue; }
-    void setAge(int ageValue){ age = ageValue; }
-    string getName(){ return name; }
-    int getAge(){ return age; }
+    Address(int hn, string srn, string cn, string stn, int zc)
+    : houseNo(hn), streetName(srn), cityName(cn), stateName(stn), zipcode(zc) {}
+    ~Address() {}
+    int getHouseNo() { return houseNo; }
+    string getStreetName() { return streetName; }
+    string getCityName() { return cityName; }
+    string getStateName() { return stateName; }
+    int getZipCode() { return zipcode; }
 private:
-    string name;
-    int age;
+    int houseNo{0}, zipcode{0};
+    string streetName, cityName, stateName;
 };
 
 int main()
-{
-    string name;
-    int age;
+{   
+    int houseNo, zipcode;
+    string streetName, cityName, stateName;
+    
+    cout << "Input the Number: ";
+    cin >> houseNo;
+    cout << "Input the Name of Street: ";
+    cin >> streetName;
+    cout << "Input the City: ";
+    cin >> cityName;
+    cout << "Input the State: ";
+    cin >> stateName;
+    cout << "Input the Zipcode: ";
+    cin >> zipcode;
 
-    cout << "Input the name: ";
-    cin >> name;
-    cout << "Input the age: ";
-    cin >> age;
-
-    Person person1(name, age);
-    cout << "Name is " << person1.getName() << ", Age is " << person1.getAge() << endl;
+    Address address(houseNo, streetName, cityName, stateName, zipcode);
+    cout << "Address : " << address.getHouseNo() << " " << address.getStreetName() << ", "
+        << address.getCityName() << ", " << address.getStateName() << " " << address.getZipCode() << endl;
     return 0;
 }
