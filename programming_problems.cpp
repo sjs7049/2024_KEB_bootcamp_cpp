@@ -1,44 +1,66 @@
-// 7-5. 데이터 멤버로 houseNo, streetName, cityName, stateName, zipcode를 갖습니다.
-// 매개변수가 있는 생성자와 소멸자 정의하세요, 주소를 출력하는 접근자 함수 만드세요.
-// 예시 3708 S Las Vegas Blvd, Las Vegas, NV 89109
+// 7-6. 다음과 같은 Triangle 클래스 정의
+// 데이터 멤버로 firstSide, SecondSide, ThirdSide를 가짐
+// 생성자 함수에는 두 변의 합이 다른 변보다 큰지 모두 확인하고, 작은 경우 assert 함수 호출
+// 접근자 함수로 getSides, getPerimeter, getArea 만듦
+// 둘레: a+b+c, 넓이: sqrt((p)*(p-a)*(p-b)*(p-c)) // p = 둘레/2
 
 #include <iostream>
+#include <cassert>
+#include <cmath>
 using namespace std;
 
-class Address
+int larger(int a, int b, int c){
+    int max;
+    if(a >= b && a >= c) { max = a; }
+    else if(b >= a && b >= c) { max = b; }
+    else { max = c; }
+    return max;
+}
+
+class Triangle
 {
 public:
-    Address(int hn, string srn, string cn, string stn, int zc)
-    : houseNo(hn), streetName(srn), cityName(cn), stateName(stn), zipcode(zc) {}
-    ~Address() {}
-    int getHouseNo() { return houseNo; }
-    string getStreetName() { return streetName; }
-    string getCityName() { return cityName; }
-    string getStateName() { return stateName; }
-    int getZipCode() { return zipcode; }
+    Triangle(int firstside, int secondside, int thirdside)
+    : firstSide(firstside), secondSide(secondside), thirdSide(thirdside){
+        if(larger(firstside, secondside, thirdside) == firstside){
+            if(firstside > (secondside + thirdside)){
+                assert(false);
+            } 
+        }
+        else if(larger(firstside, secondside, thirdside) == secondside){
+            if(secondside > (firstside + thirdside)){
+                assert(false);
+            } 
+        }
+        else if(larger(firstside, secondside, thirdside) == thirdside){
+            if(thirdside > (firstside + secondside)){
+                assert(false);
+            } 
+        }
+    }
+    void getSides() const { 
+        cout << "The Three sides are " << firstSide << ", " << secondSide << ", " << thirdSide << endl;
+    }
+    int getPerimeter() const { return (firstSide + secondSide + thirdSide); }
+    double getArea() const {
+        double p = (firstSide + secondSide + thirdSide) / 2.0;
+        double area = (p*(p - firstSide)*(p - secondSide)*(p - thirdSide));
+
+        return sqrt(area);
+    }
 private:
-    int houseNo{0}, zipcode{0};
-    string streetName, cityName, stateName;
+    int firstSide, secondSide, thirdSide;
 };
 
 int main()
 {   
-    int houseNo, zipcode;
-    string streetName, cityName, stateName;
-    
-    cout << "Input the Number: ";
-    cin >> houseNo;
-    cout << "Input the Name of Street: ";
-    cin >> streetName;
-    cout << "Input the City: ";
-    cin >> cityName;
-    cout << "Input the State: ";
-    cin >> stateName;
-    cout << "Input the Zipcode: ";
-    cin >> zipcode;
+    int a, b, c;
+    cout << "Input the three sides: ";
+    cin >> a >> b >> c;
 
-    Address address(houseNo, streetName, cityName, stateName, zipcode);
-    cout << "Address : " << address.getHouseNo() << " " << address.getStreetName() << ", "
-        << address.getCityName() << ", " << address.getStateName() << " " << address.getZipCode() << endl;
+    Triangle triangle(a, b, c);
+    triangle.getSides();
+    cout << "The perimeter of triangle is " << triangle.getPerimeter() << endl;
+    cout << "The area of triangle is " << triangle.getArea() << endl;
     return 0;
 }
