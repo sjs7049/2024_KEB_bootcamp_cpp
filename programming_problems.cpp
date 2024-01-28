@@ -1,37 +1,57 @@
-// 7-2. int 자료형의 데이터 멤버 x, char 자료형의 데이터 멤버 a를 사용하는 Two라는 클래스를 만드세요.
-// 내부에는 멤버 함수로 getX, getA, setX, setA를 정의하세요.
+// 7-3. 직교 좌표계 위의 점은 일반적으로 2개의 정수 x, y로 나타냅니다. 
+// 이러한 2개의 데이터 멤버를 갖는 Point 클래스를 만드세요. 
+// 좌표 출력하는 print 멤버 함수
 
 #include <iostream>
 using namespace std;
 
-class Two
+class Point
 {
-public: 
-    Two(int tx, char tA)
-    : x(tx), A(tA) {}
-    Two()
-    : x(0), A('0') {}
-    void setX(int tx){ x = tx; }
-    void setA(char tA){ A = tA; }
-    int getX(){ return x; }
-    char getA(){ return A; }
+public:
+    Point(int px, int py)
+    : x(px), y(py) {}
+    Point()
+    : x(0), y(0) {}
+    int getX() { return x; }
+    int getY() { return y; }
+    void print(){
+        cout << "(" << x << ", " << y << ")";
+    }
+    void wherePoint(){
+        if(x > 0){
+            if(y == 0){ cout << "Right"; }
+            else if(y > 0) { cout << "Top Right"; }
+            else{ cout << "Bottom Right"; }
+        }
+        else if(x == 0){
+            if(y == 0){ cout << "Overlap"; }
+            else if(y > 0) { cout << "Top"; }
+            else{ cout << "Bottom"; }
+        }
+        else{
+            if(y == 0){ cout << "Left"; }
+            else if(y > 0) { cout << "Top Left"; }
+            else{ cout << "Bottom Left"; }
+        }
+    }
 private:
-    int x;
-    char A;
+    int x, y;
 };
 
 int main()
 {
-    Two two1;
-    Two two2(1, 'a');
+    int x, y;
+    cout << "Input the x and y: ";
+    cin >> x >> y;
 
-    cout << two1.getX() << " " << two1.getA() << endl;
-    cout << two2.getX() << " " << two2.getA() << endl;
+    Point centerPoint;
+    Point point(x, y);
 
-    two1.setX(4);
-    two1.setA('d');
-    cout << "\nReset two1" << endl;
-    cout << two1.getX() << " " << two1.getA() << endl;
-
-    cout << endl; 
+    point.print(); 
+    cout << " = "; 
+    point.wherePoint();
+    cout << " of ";
+    centerPoint.print();
+    cout << endl;
+    return 0;
 }
