@@ -1,66 +1,50 @@
-// 7-6. 다음과 같은 Triangle 클래스 정의
-// 데이터 멤버로 firstSide, SecondSide, ThirdSide를 가짐
-// 생성자 함수에는 두 변의 합이 다른 변보다 큰지 모두 확인하고, 작은 경우 assert 함수 호출
-// 접근자 함수로 getSides, getPerimeter, getArea 만듦
-// 둘레: a+b+c, 넓이: sqrt((p)*(p-a)*(p-b)*(p-c)) // p = 둘레/2
+// 7-7. 다음과 같은 Employee 클래스를 정의하세요.
+// 데이터 멤버로 name, age, serviceYear, salary 가짐
+// 매개변수가 있는 생성자와 소멸자 정의
+// 접근자 함수 getName, getAge, getServiceYear, getSalary 가짐
 
 #include <iostream>
-#include <cassert>
-#include <cmath>
+#include <iomanip>
 using namespace std;
 
-int larger(int a, int b, int c){
-    int max;
-    if(a >= b && a >= c) { max = a; }
-    else if(b >= a && b >= c) { max = b; }
-    else { max = c; }
-    return max;
-}
-
-class Triangle
+class Employee
 {
 public:
-    Triangle(int firstside, int secondside, int thirdside)
-    : firstSide(firstside), secondSide(secondside), thirdSide(thirdside){
-        if(larger(firstside, secondside, thirdside) == firstside){
-            if(firstside > (secondside + thirdside)){
-                assert(false);
-            } 
-        }
-        else if(larger(firstside, secondside, thirdside) == secondside){
-            if(secondside > (firstside + thirdside)){
-                assert(false);
-            } 
-        }
-        else if(larger(firstside, secondside, thirdside) == thirdside){
-            if(thirdside > (firstside + secondside)){
-                assert(false);
-            } 
-        }
+    Employee(string nameValue, int ageValue, int serviceYearValue)
+    : name(nameValue), age(ageValue), serviceYear(serviceYearValue) {
+        salary = serviceYear * 100;
     }
-    void getSides() const { 
-        cout << "The Three sides are " << firstSide << ", " << secondSide << ", " << thirdSide << endl;
-    }
-    int getPerimeter() const { return (firstSide + secondSide + thirdSide); }
-    double getArea() const {
-        double p = (firstSide + secondSide + thirdSide) / 2.0;
-        double area = (p*(p - firstSide)*(p - secondSide)*(p - thirdSide));
-
-        return sqrt(area);
+    ~Employee() {}
+    string getName() const { return name; }
+    int getAge() const { return age; }
+    int getServiceYear() const { return serviceYear; }
+    int getSalary() const {
+        return salary;
     }
 private:
-    int firstSide, secondSide, thirdSide;
+    string name;
+    int age, serviceYear;
+    int salary;
 };
 
 int main()
 {   
-    int a, b, c;
-    cout << "Input the three sides: ";
-    cin >> a >> b >> c;
+    string name;
+    int age, serviceYear;
+    int salary;
 
-    Triangle triangle(a, b, c);
-    triangle.getSides();
-    cout << "The perimeter of triangle is " << triangle.getPerimeter() << endl;
-    cout << "The area of triangle is " << triangle.getArea() << endl;
+    cout << "Input the name: ";
+    cin >> name;
+    cout << "Input the age: ";
+    cin >> age;
+    cout << "Input the service year: ";
+    cin >> serviceYear;
+
+    Employee employee(name, age, serviceYear);
+    cout << "\n----Employee information----" << endl;
+    cout << setw(15) << "Name: " << employee.getName() << endl;
+    cout << setw(15) << "Age: " << employee.getAge() << endl;
+    cout << setw(15) << "Service Year: " << employee.getServiceYear() << endl;
+    cout << setw(15) << "Salary: " << employee.getSalary() << endl;
     return 0;
 }
