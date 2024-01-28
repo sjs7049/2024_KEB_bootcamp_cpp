@@ -3,6 +3,7 @@
 // 좌표 출력하는 print 멤버 함수
 
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 class Point
@@ -53,5 +54,10 @@ int main()
     cout << " of ";
     centerPoint.print();
     cout << endl;
+
+    int dx = pow(point.getX(), 2);
+    int dy = pow(point.getY(), 2);
+    double distance = sqrt((dx + dy));
+    cout << "The distance between two points is " << distance << endl;
     return 0;
 }
