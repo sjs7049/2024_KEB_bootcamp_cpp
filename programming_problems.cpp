@@ -1,30 +1,37 @@
-// 7-1. int 자료형의 데이터 멤버 x, y와 이러한 데이터 멤버의 접근자 멤버 함수 getX, getY를
-// 갖는 One이라는 클래스를 만드세요. 
+// 7-2. int 자료형의 데이터 멤버 x, char 자료형의 데이터 멤버 a를 사용하는 Two라는 클래스를 만드세요.
+// 내부에는 멤버 함수로 getX, getA, setX, setA를 정의하세요.
 
 #include <iostream>
 using namespace std;
 
-class One
+class Two
 {
 public: 
-    One(int ox, int oy)
-    : x(ox), y(oy) {}
-    One()
-    : x(0), y(0) {}
+    Two(int tx, char tA)
+    : x(tx), A(tA) {}
+    Two()
+    : x(0), A('0') {}
+    void setX(int tx){ x = tx; }
+    void setA(char tA){ A = tA; }
     int getX(){ return x; }
-    int gety(){ return y; }
+    char getA(){ return A; }
 private:
-    int x, y;
+    int x;
+    char A;
 };
 
 int main()
 {
-    One one1(3, 4);
-    One one2;
-    One one3(one1);
+    Two two1;
+    Two two2(1, 'a');
 
-    cout << "x = " << one1.getX() << ", y = " << one1.gety() << endl;
-    cout << "x = " << one2.getX() << ", y = " << one2.gety() << endl;
-    cout << "x = " << one3.getX() << ", y = " << one3.gety() << endl;
-    return 0;
+    cout << two1.getX() << " " << two1.getA() << endl;
+    cout << two2.getX() << " " << two2.getA() << endl;
+
+    two1.setX(4);
+    two1.setA('d');
+    cout << "\nReset two1" << endl;
+    cout << two1.getX() << " " << two1.getA() << endl;
+
+    cout << endl; 
 }
