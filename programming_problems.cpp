@@ -1,63 +1,40 @@
-// 7-3. 직교 좌표계 위의 점은 일반적으로 2개의 정수 x, y로 나타냅니다. 
-// 이러한 2개의 데이터 멤버를 갖는 Point 클래스를 만드세요. 
-// 좌표 출력하는 print 멤버 함수
+// 7-4. 다음과 같은 멤버를 갖는 Person 클래스를 만드세요.
+// 데이터 멤버: name, age / 접근자 멤버 함수: getName, getAge
+// 설정자 멤버 함수: setName, setAge / 매개변수가 있는 생성자와 소멸자 포함
 
 #include <iostream>
-#include <cmath>
 using namespace std;
 
-class Point
+class Person
 {
 public:
-    Point(int px, int py)
-    : x(px), y(py) {}
-    Point()
-    : x(0), y(0) {}
-    int getX() { return x; }
-    int getY() { return y; }
-    void print(){
-        cout << "(" << x << ", " << y << ")";
+    Person(string nameValue, int ageValue)
+    : name(nameValue), age(ageValue) {
+        cout << "이름과 나이가 생성되었습니다." << endl;
     }
-    void wherePoint(){
-        if(x > 0){
-            if(y == 0){ cout << "Right"; }
-            else if(y > 0) { cout << "Top Right"; }
-            else{ cout << "Bottom Right"; }
-        }
-        else if(x == 0){
-            if(y == 0){ cout << "Overlap"; }
-            else if(y > 0) { cout << "Top"; }
-            else{ cout << "Bottom"; }
-        }
-        else{
-            if(y == 0){ cout << "Left"; }
-            else if(y > 0) { cout << "Top Left"; }
-            else{ cout << "Bottom Left"; }
-        }
+    ~Person() {
+        cout << "이름과 나이가 소멸되었습니다." << endl;
     }
+    void setName(string nameValue){ name = nameValue; }
+    void setAge(int ageValue){ age = ageValue; }
+    string getName(){ return name; }
+    int getAge(){ return age; }
 private:
-    int x, y;
+    string name;
+    int age;
 };
 
 int main()
 {
-    int x, y;
-    cout << "Input the x and y: ";
-    cin >> x >> y;
+    string name;
+    int age;
 
-    Point centerPoint;
-    Point point(x, y);
+    cout << "Input the name: ";
+    cin >> name;
+    cout << "Input the age: ";
+    cin >> age;
 
-    point.print(); 
-    cout << " = "; 
-    point.wherePoint();
-    cout << " of ";
-    centerPoint.print();
-    cout << endl;
-
-    int dx = pow(point.getX(), 2);
-    int dy = pow(point.getY(), 2);
-    double distance = sqrt((dx + dy));
-    cout << "The distance between two points is " << distance << endl;
+    Person person1(name, age);
+    cout << "Name is " << person1.getName() << ", Age is " << person1.getAge() << endl;
     return 0;
 }
