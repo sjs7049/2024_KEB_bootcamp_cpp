@@ -1,26 +1,43 @@
+
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
-void reverseArray(int array1[], int array2[], int size){
-    for(int i = 0; i < size; i++){
-        array2[i] = array1[(size - 1) - i];
+class Student
+{
+public:
+    Student() {}
+    Student(string nameValue, int scoreValue)
+    : name(nameValue), score(scoreValue) {
+        if(scoreValue > 90) { grade = 'A'; }
+        else if(scoreValue > 80) { grade = 'B'; }
+        else if(scoreValue > 70) { grade = 'C'; }
+        else if(scoreValue > 60) { grade = 'D'; }
+        else { grade = 'F'; }
     }
-}
-
-void print(int array[], int size){
-    for(int i = 0; i < size; i++){
-        cout << array[i] << " ";
+    ~Student() {}
+    void print(){
+        cout << setw(12) << left << name;
+        cout << setw(8) << score;
+        cout << setw(8) << grade << endl;
     }
-    cout << endl;
-}
+private:
+    string name;
+    int score;
+    char grade;
+};
 
 int main()
 {
-    int numbers[5] = {150, 170, 190, 110, 130};
-    int reverseNumbers[5];
-    print(numbers, 5);
+    Student student[5];
+    student[0] = Student("George", 82);
+    student[1] = Student("John", 73);
+    student[2] = Student("Luci", 91);
+    student[3] = Student("Mary", 72);
+    student[4] = Student("Sue", 65);
 
-    reverseArray(numbers, reverseNumbers, 5);
-    print(reverseNumbers, 5);
+    for(int i = 0; i < 5; i++){
+        student[i].print();
+    }
     return 0;
 }
