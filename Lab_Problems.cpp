@@ -1,38 +1,50 @@
-// 빈도 배열과 히스토그램 만들기
+// 배열 선형 변환하기
 
 #include <iostream>
-#include <fstream>
+#include <iomanip>
 using namespace std;
+
+void print(int array[][2], int row, int col){
+    for(int j = 0; j < col; j++){
+        for(int i = 0; i < row; i++){
+            cout << setw(3) << array[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
+void rowTransform(int array[][2], int row, int col){
+    for(int j = 0; j < col; j++){
+        for(int i = 0; i < row; i++){
+            cout << setw(3) << array[i][j] << " ";
+        }
+    }
+    cout << endl;
+}
+
+void colTransform(int array[][2], int row, int col){
+    for(int i = 0; i < row; i++){
+        for(int j = 0; j < col; j++){
+            cout << setw(3) << array[i][j] << " ";
+        }
+    }
+    cout << endl;
+}
 
 int main()
 {
-    ifstream ifo("intHistogram.txt");
-    if(!ifo){
-        cout << "The file could NOT be opened!" << endl;
-        exit(1);
-    }
+    const int rowSize = 4;
+    const int colSize = 2;
+    int numbers[rowSize][colSize] = {{0,10}, {1,11}, {2,12}, {3,13}};
+
+    cout << "원본 배열" << endl;
+    print(numbers, rowSize, colSize);
+
+    cout << "행 방향으로 선형 변환한 결과:     ";
+    rowTransform(numbers, rowSize, colSize);
+    cout << "열 방향으로 선형 변환한 결과:     ";
+    colTransform(numbers, rowSize, colSize);
     
-    const int CAPACITY = 10;
-    int frequency[CAPACITY] = {0};
-
-    int num;
-    int size = 0;
-    while(ifo >> num){
-        if(num >= 0 and num <= 9){
-            size++;
-            frequency[num]++;
-        }
-    }
-
-    ifo.close();
-
-    cout << "파일 안에 " << size << "개의 유효한 데이터가 있습니다." << endl;
-    for(int i = 0; i < CAPACITY; i++){
-        cout << i << " ";
-        for(int j = 0; j < frequency[i]; j++){
-            cout << "*";
-        }
-        cout << " " << frequency[i] << endl;
-    }
     return 0;
 }
