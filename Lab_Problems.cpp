@@ -1,50 +1,91 @@
-// 배열 선형 변환하기
+// Course 클래스 만들기
 
 #include <iostream>
 #include <iomanip>
+#include <cmath>
+#include <fstream>
 using namespace std;
 
-void print(int array[][2], int row, int col){
-    for(int j = 0; j < col; j++){
-        for(int i = 0; i < row; i++){
-            cout << setw(3) << array[i][j] << " ";
+class Course
+{
+public:
+    Course(int nos, const char* ifoName)
+    : numOfStds(nos), inputFileName(ifoName) {
+        if(!inputFile){
+            cout << "The file could NOT be opened!" << endl;
+            exit(1);
         }
-        cout << endl;
+        inputFile.open(inputFileName);
+        students = new Student[numOfStds];
+        getInput();
+        setGrades();
+        setAverage();
+        setDeviations();
+        printResult();
     }
-    cout << endl;
-}
+    ~Course() {
+        delete[] students;
+        inputFile.close();
+    }
+private:
+    int numOfStds;
+    const char* inputFileName;
+    ifstream inputFile;
+    struct Student {int id; int score; char grade; double deviation;};
+    Student* students;
+    double averageScore;
+    double standardDeviation;
+    void getInput(){
+        for(int i = 0; i < numOfStds; i++){
+            inputFile >> students[i].id;
+            inputFile >> students[i].score;
+        }
+    }
+    void setGrades(){
+        char grades[] = {'F', 'F', 'F', 'F', 'F', 'F', 'D', 'C', 'B', 'A', 'A'};
+        for(int i = 0; i < numOfStds; i++){
+            int value = students[i].score / 10;
+            students[i].grade = grades[value]; 
+        }
+    }
+    void setAverage(){
+        int sum = 0;
+        for(int i = 0; i < numOfStds; i++){
+            sum += students[i].score;
+        }
+        averageScore = static_cast<double> (sum) / numOfStds;
+    }
+    void setDeviations(){
+        double sumDv = 0.0;
+        for(int i = 0; i < numOfStds; i++){
+            double value = students[i].score - averageScore;
+            sumDv += pow(value, 2);
+            students[i].deviation = value;
+        }
+        standardDeviation = sqrt(sumDv) / numOfStds;
+    }
+    void printResult() const{
+        cout << "ID   점수  등급    편차" << endl;
+        cout << "---- ----- ----- -------" << endl;
 
-void rowTransform(int array[][2], int row, int col){
-    for(int j = 0; j < col; j++){
-        for(int i = 0; i < row; i++){
-            cout << setw(3) << array[i][j] << " ";
+        for(int i = 0; i < numOfStds; i++){
+            cout << setw(4) << noshowpoint << noshowpos;
+            cout << students[i].id;
+            cout << setw(6) << noshowpoint << noshowpos;
+            cout << students[i].score;
+            cout << setw(6) << students[i].grade;
+            cout << fixed << setw(8) << setprecision(2);
+            cout << showpoint << showpos;
+            cout << students[i].deviation << endl; 
         }
-    }
-    cout << endl;
-}
 
-void colTransform(int array[][2], int row, int col){
-    for(int i = 0; i < row; i++){
-        for(int j = 0; j < col; j++){
-            cout << setw(3) << array[i][j] << " ";
-        }
+        cout << "평균 점수: " << showpos << fixed << setprecision(2) << averageScore << endl;
+        cout << "표준 편차: " << showpos << fixed << setprecision(2) << standardDeviation << endl;
     }
-    cout << endl;
-}
+};
 
 int main()
 {
-    const int rowSize = 4;
-    const int colSize = 2;
-    int numbers[rowSize][colSize] = {{0,10}, {1,11}, {2,12}, {3,13}};
-
-    cout << "원본 배열" << endl;
-    print(numbers, rowSize, colSize);
-
-    cout << "행 방향으로 선형 변환한 결과:     ";
-    rowTransform(numbers, rowSize, colSize);
-    cout << "열 방향으로 선형 변환한 결과:     ";
-    colTransform(numbers, rowSize, colSize);
-    
+    Course course(10, "scores.txt");
     return 0;
 }
