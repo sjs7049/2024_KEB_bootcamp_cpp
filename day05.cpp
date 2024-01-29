@@ -1,18 +1,27 @@
 #include <iostream>
 using namespace std;
 
-void print(int(*m)[4], int rows){
-    for(int i = 0; i < rows; i++){
-        for(int j = 0; j < 4; j++){
-            cout << m[i][j] << " ";
-        }
-        cout << endl;
-    }
-}
-
 int main()
 {
-    int matrix[3][4] = {{10, 11, 12, 13}, {20, 21, 22, 23}, {31, 32, 33, 34}};
-    print(matrix, 3);
+    int size;
+    int* pArray;
+
+    do
+    {
+        cout << "0보다 큰 배열의 크기를 입력하세요: ";
+        cin >> size;
+    } while (size <= 0);
+    
+    pArray = new int[size];
+    for(int i = 0; i < size; i++){
+        cout << i << "번째 요소의 값을 입력하세요: ";
+        cin >> *(pArray + i);
+    }
+
+    cout << "배열 내부의 요소: " << endl;
+    for(int i = 0; i < size; i++){
+        cout << *(pArray + i) << "   ";
+    }
+    delete[] pArray;
     return 0;
 }
