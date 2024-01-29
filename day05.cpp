@@ -1,27 +1,43 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main()
 {
-    int size;
-    int* pArray;
+    int maxPower = 10;
+    int n;
 
     do
     {
-        cout << "0보다 큰 배열의 크기를 입력하세요: ";
-        cin >> size;
-    } while (size <= 0);
+        cout << "(x + y)^n에서 n을 입력하세요: ";
+        cin >> n;
+    } while (n < 0 || n > maxPower);
     
-    pArray = new int[size];
-    for(int i = 0; i < size; i++){
-        cout << i << "번째 요소의 값을 입력하세요: ";
-        cin >> *(pArray + i);
+    int** pascal = new int*[n+1];
+    for(int i = 0; i < n + 1; i++){
+        pascal[i] = new int[i];
     }
 
-    cout << "배열 내부의 요소: " << endl;
-    for(int i = 0; i < size; i++){
-        cout << *(pArray + i) << "   ";
+    for(int i = 0; i <= n; i++){
+        for(int j = 0; j < i + 1; j++){
+            if(j == 0 || i == j){
+                pascal[i][j] = 1;
+            }
+            else{
+                pascal[i][j] = pascal[i-1][j-1] + pascal[i-1][j];
+            }
+        }
     }
-    delete[] pArray;
+
+    cout << "(x + y)^" << n << "의 이항계수: ";
+    for(int j = 0; j <= n; j++){
+        cout << setw(5) << left << pascal[n][j];
+    }
+    cout << endl;
+    
+    for(int i = 0; i < n + 1; i++){
+        delete[] pascal[i];
+    }
+    delete[] pascal;
     return 0;
 }
