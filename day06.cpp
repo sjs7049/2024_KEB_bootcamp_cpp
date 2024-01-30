@@ -4,17 +4,14 @@ using namespace std;
 
 int main()
 {
-    char lines[3][80];
+    char str[] = "Hello friends.";
 
-    for(int i = 0; i < 3; i++){
-        cout << "한 줄을 입력하세요: ";
-        cin.getline(lines[i], 80);
-    }
+    char* cptr = strchr(str, 'e');
+    *cptr = 'E';
+    cout << "첫 번째 변경 후의 str: " << str << endl;
 
-    cout << endl;
-    cout << "출력: " << endl;
-    for(int i = 0; i< 3; i++){
-        cout << lines[i] << endl;
-    }
+    cptr = strrchr(str, 'e');
+    *cptr = 'E';
+    cout << "두 번째 변경 후의 str: " << str << endl;
     return 0;
 }
