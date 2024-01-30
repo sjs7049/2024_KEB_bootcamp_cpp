@@ -1,12 +1,24 @@
 #include <iostream>
-#include <cstring>
+#include <string>
 using namespace std;
+
+void reverse(string& strg){
+    string tmp(strg);
+    int size = strg.size();
+    
+    for(int i = 0; i < size; i++){
+        strg[i] = tmp[size - 1 - i];
+    }
+}
 
 int main()
 {
-    char str1[20] = "This is ";
-    const char* str2 = "a string.";
-    strcat(str1, str2);
-    cout << "str1: " << str1 << endl;
-    return 0;
+    string strg;
+    cout << "문자열을 입력하세요: ";
+    getline(cin, strg);
+    cout << "원본 문자열: " << strg << endl;
+
+    reverse(strg);
+    cout << "뒤집은 문자열: " << strg << endl;
+    return 0;   
 }
